@@ -5,6 +5,7 @@ import 'package:todoapp/api/todo_api.dart';
 import 'package:todoapp/store/todo/action.dart';
 
 import '../../api/exception.dart';
+import '../../models/todo/todo.dart';
 import '../app_state.dart';
 
 class ToDoMiddlware implements MiddlewareClass<ApplicationState> {
@@ -28,6 +29,16 @@ class ToDoMiddlware implements MiddlewareClass<ApplicationState> {
         store.dispatch(CreateToDoSucceededAction());
       } on ApiException catch (e) {
         store.dispatch(CreateToDoFailedAction(e.message));
+      }
+    }
+
+    if (action is ToggleToDoAction) {
+      try {
+        log('ToggleToDoAction Middleware: ${action.todo}');
+        ToDo todo = await ToDoApi.updateToDoStatus(action.todo.uuid);
+        store.dispatch(ToggleToDoSucceededAction(todo));
+      } on ApiException catch (e) {
+        store.dispatch(ToggleToDoFailedAction(action.todo, e.message));
       }
     }
   }

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
+import 'package:hive/hive.dart';
+import 'package:todoapp/api/todo_api.dart';
 import 'package:todoapp/models/todo/todo.dart';
 import 'package:todoapp/store/app_state.dart';
 import 'package:todoapp/store/todo/action.dart';
@@ -47,6 +49,15 @@ class _HomePageState extends State<HomePage> {
               );
             },
           ),
+          IconButton(
+            icon: const Icon(
+              Icons.delete_forever,
+              color: Colors.red,
+            ),
+            onPressed: () async {
+              ToDoApi.deleteAll();
+            },
+          ),
         ],
       ),
       body: body(),
@@ -70,7 +81,10 @@ class _HomePageState extends State<HomePage> {
                 title: Text(todo.name),
                 trailing: Checkbox(
                   value: todo.isCompleted,
-                  onChanged: (value) {},
+                  onChanged: (value) {
+                    StoreProvider.of<ApplicationState>(context)
+                        .dispatch(ToggleToDoAction(todo));
+                  },
                 ),
               );
             },
@@ -112,7 +126,7 @@ class _AddToDoFormState extends State<AddToDoForm> {
             onPressed: () {
               String name = _textEditingController.text;
               ToDo todo = ToDo(
-                uuid: DateTime.now().toString(),
+                uuid: DateTime.now().millisecondsSinceEpoch.toString(),
                 name: name,
                 description: '',
                 isCompleted: false,

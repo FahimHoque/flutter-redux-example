@@ -45,3 +45,31 @@ class LoadToDosFailedAction implements ToDoAction {
   @override
   String toString() => "$LoadToDosFailedAction($error)";
 }
+
+class ToggleToDoAction implements ToDoAction {
+  final ToDo todo;
+
+  ToggleToDoAction(this.todo);
+
+  @override
+  String toString() => "$ToggleToDoAction($todo)";
+}
+
+class ToggleToDoSucceededAction implements ToDoAction {
+  final ToDo todo;
+
+  ToggleToDoSucceededAction(this.todo);
+
+  @override
+  String toString() => "$ToggleToDoSucceededAction($todo)";
+}
+
+class ToggleToDoFailedAction implements ToDoAction {
+  final ToDo todo;
+  final String error;
+
+  ToggleToDoFailedAction(this.todo, this.error);
+
+  @override
+  String toString() => "$ToggleToDoFailedAction($todo, $error)";
+}
