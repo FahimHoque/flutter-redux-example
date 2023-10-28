@@ -1,16 +1,25 @@
 # todoapp
 
-A new Flutter project.
+This project intends to create a descriptive example on how to use
+redux with flutter.
 
-## Getting Started
+## Packages used
 
-This project is a starting point for a Flutter application.
+- [redux](https://pub.dev/packages/redux)
+- [flutter_redux](https://pub.dev/packages/flutter_redux)
+- [hive](https://pub.dev/packages/hive)
+- [hive_flutter](https://pub.dev/packages/hive_flutter)
+- [hive_generator](https://pub.dev/packages/hive_generator)
+- [build_runner](https://pub.dev/packages/build_runner)
+- [json_annotation](https://pub.dev/packages/json_annotation)
+- [freezed](https://pub.dev/packages/freezed)
 
-A few resources to get you started if this is your first Flutter project:
+## Future work
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- [ ] Add tests
+- [ ] Add more comments
+- [ ] Add more documentation
+- [ ] Integrate package [redux_saga](https://pub.dev/packages/redux_saga)
+- [ ] Add more logs
+- [ ] Add more examples
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
