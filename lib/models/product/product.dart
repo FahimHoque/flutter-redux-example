@@ -9,7 +9,7 @@ class Product with _$Product {
     required String uuid,
     required String name,
     required String description,
-    required String price,
+    required double price,
   }) = _Product;
 
   factory Product.fromJson(Map<String, dynamic> json) =>

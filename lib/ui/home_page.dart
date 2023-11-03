@@ -5,8 +5,6 @@ import 'package:todoapp/models/todo/todo.dart';
 import 'package:todoapp/store/appstate.dart';
 import 'package:todoapp/redux/actions/todo_action.dart';
 
-import '../api/product_api.dart';
-
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -21,7 +19,6 @@ class _HomePageState extends State<HomePage> {
     Future.delayed(Duration.zero, () {
       StoreProvider.of<ApplicationState>(context)
           .dispatch(FetchToDosRequested());
-      ProductApi.getAllProducts();
     });
   }
 
