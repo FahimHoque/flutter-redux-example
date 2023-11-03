@@ -1,5 +1,4 @@
 import 'dart:developer';
-
 import 'package:redux_saga/redux_saga.dart';
 
 import '../api/todo_api.dart';
