@@ -25,4 +25,11 @@ class CartApi {
     }
     return cart;
   }
+
+  Future<Cart> removeFromCart(String uuid) async {
+    Cart cart = await getCart();
+    cart.remove(uuid);
+    Memdb.set(CART_ID, cart);
+    return cart;
+  }
 }

@@ -30,16 +30,6 @@ class AddItemToCartFailed {
   }
 }
 
-class RemoveItemFromCartRequest {
-  final String uuid;
-  RemoveItemFromCartRequest(this.uuid);
-
-  @override
-  String toString() {
-    return 'RemoveItemFromCartRequest{uuid: $uuid}';
-  }
-}
-
 class FetchCartRequest {
   @override
   String toString() {
@@ -64,5 +54,35 @@ class FetchCartFailure {
   @override
   String toString() {
     return 'FetchCartFailure{error: $error}';
+  }
+}
+
+class RemoveItemFromCartRequest {
+  final String uuid;
+  RemoveItemFromCartRequest(this.uuid);
+
+  @override
+  String toString() {
+    return 'RemoveItemFromCartRequest{uuid: $uuid}';
+  }
+}
+
+class RemoveItemFromCartSuccess {
+  final Cart cart;
+  RemoveItemFromCartSuccess(this.cart);
+
+  @override
+  String toString() {
+    return 'RemoveItemFromCartSuccess{cart: $cart}';
+  }
+}
+
+class RemoveItemFromCartFailed {
+  final String error;
+  RemoveItemFromCartFailed(this.error);
+
+  @override
+  String toString() {
+    return 'RemoveItemFromCartFailure{error: $error}';
   }
 }

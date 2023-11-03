@@ -1,21 +1,28 @@
 import '../product/product.dart';
 
 class CartItem {
+  final String uuid;
   final String name;
   final double price;
   final int quantity;
 
-  CartItem(this.name, this.price, this.quantity);
+  CartItem(this.uuid, this.name, this.price, this.quantity);
 
   CartItem.fromProduct(Product product)
-      : name = product.name,
+      : uuid = product.uuid,
+        name = product.name,
         price = product.price,
         quantity = 1;
 
   double get total => price * quantity;
 
   CartItem copyWith({int? quantity}) {
-    return CartItem(name, price, quantity ?? this.quantity);
+    return CartItem(
+      uuid,
+      name,
+      price,
+      quantity ?? this.quantity,
+    );
   }
 
   @override
@@ -45,6 +52,7 @@ class CartItem {
 
   factory CartItem.fromJson(Map<String, dynamic> json) {
     return CartItem(
+      json['uuid'],
       json['name'],
       json['price'],
       json['quantity'],
@@ -78,13 +86,14 @@ class Cart {
     return _items[uuid];
   }
 
-  void remove(Product product) {
-    if (_items.containsKey(product.uuid)) {
-      if (_items[product.uuid]!.quantity > 1) {
-        _items[product.uuid] = _items[product.uuid]!
-            .copyWith(quantity: _items[product.uuid]!.quantity - 1);
+  void remove(String uuid) {
+    if (_items.containsKey(uuid)) {
+      if (_items[uuid]!.quantity > 1) {
+        _items[uuid] = _items[uuid]!.copyWith(
+          quantity: _items[uuid]!.quantity - 1,
+        );
       } else {
-        _items.remove(product.uuid);
+        _items.remove(uuid);
       }
     }
   }

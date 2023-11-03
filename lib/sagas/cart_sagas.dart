@@ -36,8 +36,26 @@ class CartSaga {
     );
   }
 
+  removeItemFromCart({dynamic action}) sync* {
+    yield Try(
+      () sync* {
+        var result = Result();
+        yield Call(() {
+          String uuid = action.uuid as String;
+
+          return CartApi().removeFromCart(uuid);
+        }, result: result);
+        yield Put(RemoveItemFromCartSuccess(result.value));
+      },
+      Catch: (e, s) sync* {
+        yield Put(RemoveItemFromCartFailed(e));
+      },
+    );
+  }
+
   cartRootSaga() sync* {
     yield TakeEvery(addToCart, pattern: AddItemToCartRequest);
     yield TakeEvery(fetchCart, pattern: FetchCartRequest);
+    yield TakeEvery(removeItemFromCart, pattern: RemoveItemFromCartRequest);
   }
 }

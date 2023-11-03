@@ -1,7 +1,3 @@
-// ignore_for_file: slash_for_doc_comments
-
-import 'dart:developer';
-
 import 'package:hive/hive.dart';
 import 'package:todoapp/models/todo/todo.dart';
 
@@ -15,9 +11,6 @@ class ToDoApi {
 
   static Future<List<ToDo>> getToDos() async {
     final box = await Hive.openBox<ToDo>(box_name);
-    for (var i = 0; i < box.length; i++) {
-      log('ToDoApi: ${box.getAt(i)!.uuid}');
-    }
     return box.values.toList();
   }
 
@@ -35,9 +28,7 @@ class ToDoApi {
     return await box.delete(id);
   }
 
-  /**
-   * Delete ALL ITEMS IN BOX
-   */
+  /// Delete ALL ITEMS IN BOX
   static Future<void> deleteAll() async {
     final box = await Hive.openBox<ToDo>(box_name);
     await box.clear();

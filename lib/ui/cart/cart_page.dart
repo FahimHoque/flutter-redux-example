@@ -55,8 +55,14 @@ class _CartPageState extends State<CartPage> {
               title: Text(state.cart.items[index].name),
               subtitle: Text(state.cart.items[index].price.toString()),
               trailing: IconButton(
-                icon: const Icon(Icons.delete_forever, color: Colors.red),
-                onPressed: () {},
+                icon: const Icon(Icons.delete, color: Colors.red),
+                onPressed: () {
+                  StoreProvider.of<ApplicationState>(context).dispatch(
+                    RemoveItemFromCartRequest(
+                      state.cart.items[index].uuid,
+                    ),
+                  );
+                },
               ),
             );
           },
