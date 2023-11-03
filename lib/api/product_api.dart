@@ -1,7 +1,7 @@
 import 'dart:convert';
-import 'dart:developer';
 
 import 'package:flutter/services.dart';
+import 'package:todoapp/api/exception.dart';
 import 'package:todoapp/models/product/product.dart';
 
 class ProductApi {
@@ -18,7 +18,7 @@ class ProductApi {
 
       return products;
     } catch (e) {
-      log(e.toString());
+      ApiException(e.toString());
       return [];
     }
   }

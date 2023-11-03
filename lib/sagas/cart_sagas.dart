@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:redux_saga/redux_saga.dart';
 import 'package:todoapp/redux/actions/cart_action.dart';
 
@@ -12,13 +10,12 @@ class CartSaga {
         var result = Result();
         yield Call(() {
           String uuid = action.uuid as String;
-          log('Calling CartApi.addToCart($uuid)');
+
           return CartApi().addToCart(uuid);
         }, result: result);
         yield Put(AddItemToCartSuccess(result.value));
       },
       Catch: (e, s) sync* {
-        log('addToCart failed: $e');
         yield Put(AddItemToCartFailed(e));
       },
     );

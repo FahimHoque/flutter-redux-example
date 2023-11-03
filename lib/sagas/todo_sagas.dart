@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'package:redux_saga/redux_saga.dart';
 
 import '../api/todo_api.dart';
@@ -9,7 +8,6 @@ fetchToDos({dynamic action}) sync* {
     () sync* {
       var result = Result();
       yield Call(() {
-        log('Calling ToDoApi.getToDos()');
         return ToDoApi.getToDos();
       }, result: result);
       yield Put(FetchTodosSucceeded(result.value));
@@ -25,7 +23,6 @@ createToDoAction({dynamic action}) sync* {
     () sync* {
       var result = Result();
       yield Call(() {
-        log('Calling ToDoApi.createToDo()');
         return ToDoApi.createToDo(
           action.todo,
         );
@@ -43,7 +40,6 @@ toggleToDoAction({dynamic action}) sync* {
     () sync* {
       var result = Result();
       yield Call(() {
-        log('Calling ToDoApi.updateToDoStatus()');
         return ToDoApi.updateToDoStatus(
           action.todo.uuid,
         );

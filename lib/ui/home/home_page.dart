@@ -43,6 +43,7 @@ class _HomePageState extends State<HomePage> {
             onPressed: () {
               showModalBottomSheet(
                 context: context,
+                useRootNavigator: true,
                 builder: (context) {
                   return const AddToDoForm();
                 },
