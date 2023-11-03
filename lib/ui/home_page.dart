@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:todoapp/api/todo_api.dart';
 import 'package:todoapp/models/todo/todo.dart';
-import 'package:todoapp/redux/appstate.dart';
+import 'package:todoapp/store/appstate.dart';
 import 'package:todoapp/redux/actions/todo_action.dart';
 
 class HomePage extends StatefulWidget {

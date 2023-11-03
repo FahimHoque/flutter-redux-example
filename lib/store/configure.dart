@@ -1,10 +1,11 @@
 import 'package:redux/redux.dart';
-import 'package:todoapp/redux/appstate.dart';
+import 'package:todoapp/store/appstate.dart';
 import 'package:redux_saga/redux_saga.dart';
+import 'package:todoapp/sagas/todo_sagas.dart';
 
 import '../redux/reducer.dart';
 
-Store<ApplicationState> configure() {
+Store<ApplicationState> configureStore() {
   SagaMiddleware sagaMiddleware = createSagaMiddleware();
 
   final store = Store<ApplicationState>(
@@ -14,5 +15,6 @@ Store<ApplicationState> configure() {
   );
 
   sagaMiddleware.setStore(store);
+  sagaMiddleware.run(rootSaga);
   return store;
 }
