@@ -1,4 +1,5 @@
 import 'package:redux/redux.dart';
+import 'package:redux_logging/redux_logging.dart';
 import 'package:todoapp/sagas/cart_sagas.dart';
 import 'package:todoapp/sagas/product_sagas.dart';
 import 'package:todoapp/store/appstate.dart';
@@ -13,7 +14,7 @@ Store<ApplicationState> configureStore() {
   final store = Store<ApplicationState>(
     reducer,
     initialState: ApplicationState.initial(),
-    middleware: [applyMiddleware(sagaMiddleware)],
+    middleware: [applyMiddleware(sagaMiddleware), LoggingMiddleware.printer()],
   );
 
   sagaMiddleware.setStore(store);
