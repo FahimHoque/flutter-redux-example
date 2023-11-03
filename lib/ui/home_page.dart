@@ -60,7 +60,10 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
       ),
-      body: body(),
+      body: Padding(
+        padding: const EdgeInsets.all(12.0),
+        child: body(),
+      ),
     );
   }
 
