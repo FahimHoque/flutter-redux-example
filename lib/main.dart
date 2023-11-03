@@ -4,10 +4,10 @@ import 'package:path_provider/path_provider.dart';
 import 'package:redux/redux.dart';
 import 'package:todoapp/app.dart';
 import 'package:todoapp/models/todo/todo_adapter.dart';
-import 'package:todoapp/store/app_state.dart';
-import 'package:todoapp/store/todo/middleware.dart';
+import 'package:todoapp/redux/appstate.dart';
+import 'package:todoapp/redux/middlewares/todo_middleware.dart';
 
-import 'store/reducer.dart';
+import 'redux/reducer.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();

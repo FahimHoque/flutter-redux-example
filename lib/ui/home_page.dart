@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:todoapp/api/todo_api.dart';
 import 'package:todoapp/models/todo/todo.dart';
-import 'package:todoapp/store/app_state.dart';
-import 'package:todoapp/store/actions/todo_action.dart';
+import 'package:todoapp/redux/appstate.dart';
+import 'package:todoapp/redux/actions/todo_action.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -17,7 +17,8 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
     Future.delayed(Duration.zero, () {
-      StoreProvider.of<ApplicationState>(context).dispatch(LoadToDosAction());
+      StoreProvider.of<ApplicationState>(context)
+          .dispatch(FetchToDosRequested());
     });
   }
 

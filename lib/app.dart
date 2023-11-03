@@ -3,7 +3,7 @@ import 'package:flutter_redux/flutter_redux.dart';
 import 'package:redux/redux.dart';
 import 'package:todoapp/ui/home_page.dart';
 
-import 'store/app_state.dart';
+import 'redux/appstate.dart';
 
 class MyApp extends StatelessWidget {
   final Store<ApplicationState> store;

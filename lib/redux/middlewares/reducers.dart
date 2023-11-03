@@ -3,13 +3,12 @@ import 'package:todoapp/models/todo/todo.dart';
 import '../actions/todo_action.dart';
 
 final toDoReducer = combineReducers<List<ToDo>>([
-  TypedReducer<List<ToDo>, LoadToDosSucceededAction>(_loadToDosSucceeded),
+  TypedReducer<List<ToDo>, FetchTodosSucceeded>(_loadToDosSucceeded),
   TypedReducer<List<ToDo>, CreateToDoRequested>(_createToDo),
   TypedReducer<List<ToDo>, ToggleToDoSucceededAction>(_toggleToDoSucceeded),
 ]);
 
-List<ToDo> _loadToDosSucceeded(
-    List<ToDo> state, LoadToDosSucceededAction action) {
+List<ToDo> _loadToDosSucceeded(List<ToDo> state, FetchTodosSucceeded action) {
   return action.todos;
 }
 

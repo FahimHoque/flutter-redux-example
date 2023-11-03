@@ -1,5 +1,5 @@
-import 'package:todoapp/store/app_state.dart';
-import 'package:todoapp/store/todo/reducers.dart';
+import 'package:todoapp/redux/appstate.dart';
+import 'package:todoapp/redux/reducers/todo_reducers.dart';
 
 ApplicationState reducer(ApplicationState state, action) {
   return ApplicationState(
