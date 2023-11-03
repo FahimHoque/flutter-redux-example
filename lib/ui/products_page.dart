@@ -23,8 +23,40 @@ class _ProductsPageState extends State<ProductsPage> {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      backgroundColor: Colors.amber,
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Products'),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.shopping_cart),
+            onPressed: () {},
+          ),
+        ],
+      ),
+      body: body(),
+    );
+  }
+
+  Widget body() {
+    return StoreConnector<ApplicationState, ApplicationState>(
+      converter: (store) => store.state,
+      builder: (context, state) {
+        return ListView.builder(
+          itemCount: state.products.length,
+          itemBuilder: (context, index) {
+            final product = state.products[index];
+            return ListTile(
+              title: Text(product.name),
+              subtitle: Text(product.description),
+              isThreeLine: true,
+              trailing: IconButton(
+                icon: const Icon(Icons.add_shopping_cart),
+                onPressed: () {},
+              ),
+            );
+          },
+        );
+      },
     );
   }
 }
