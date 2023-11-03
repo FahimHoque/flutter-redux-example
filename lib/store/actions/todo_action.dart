@@ -1,26 +1,59 @@
+// ignore_for_file: constant_identifier_names
+
 import '../../models/todo/todo.dart';
+
+enum ActionType {
+  REQUESTED,
+  LOADING,
+  SUCCEEDED,
+  FAILED,
+}
 
 abstract class ToDoAction {}
 
-class CreateToDoAction implements ToDoAction {
+// class CreateToDoAction implements ToDoAction {
+//   final ToDo todo;
+//   CreateToDoAction(this.todo);
+//   @override
+//   String toString() => "$CreateToDoAction";
+// }
+
+// class CreateToDoSucceededAction implements ToDoAction {
+//   @override
+//   String toString() => "$CreateToDoSucceededAction";
+// }
+
+// class CreateToDoFailedAction implements ToDoAction {
+//   final String error;
+
+//   CreateToDoFailedAction(this.error);
+
+//   @override
+//   String toString() => "$CreateToDoFailedAction($error)";
+// }
+
+class CreateToDoRequested implements ToDoAction {
   final ToDo todo;
-  CreateToDoAction(this.todo);
+
+  CreateToDoRequested(this.todo);
+
   @override
-  String toString() => "$CreateToDoAction";
+  String toString() => "$CreateToDoRequested($todo)";
 }
 
-class CreateToDoSucceededAction implements ToDoAction {
+class CreateToDoSucceeded implements ToDoAction {
   @override
-  String toString() => "$CreateToDoSucceededAction";
+  String toString() => "$CreateToDoSucceeded()";
 }
 
-class CreateToDoFailedAction implements ToDoAction {
+class CreateToDoFailed implements ToDoAction {
+  final ToDo todo;
   final String error;
 
-  CreateToDoFailedAction(this.error);
+  CreateToDoFailed(this.todo, this.error);
 
   @override
-  String toString() => "$CreateToDoFailedAction($error)";
+  String toString() => "$CreateToDoFailed($todo, $error)";
 }
 
 class LoadToDosAction implements ToDoAction {

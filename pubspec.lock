@@ -507,6 +507,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "5.0.0"
+  redux_saga:
+    dependency: "direct main"
+    description:
+      name: redux_saga
+      sha256: d9cfb0c31b7999fb5aec56a8878c5f091e7faba822ae6f7586e2792615511b70
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.1.0"
   redux_thunk:
     dependency: "direct main"
     description:

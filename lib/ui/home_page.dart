@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
-import 'package:hive/hive.dart';
 import 'package:todoapp/api/todo_api.dart';
 import 'package:todoapp/models/todo/todo.dart';
 import 'package:todoapp/store/app_state.dart';
-import 'package:todoapp/store/todo/action.dart';
+import 'package:todoapp/store/actions/todo_action.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -133,7 +132,7 @@ class _AddToDoFormState extends State<AddToDoForm> {
               );
 
               StoreProvider.of<ApplicationState>(context)
-                  .dispatch(CreateToDoAction(todo));
+                  .dispatch(CreateToDoRequested(todo));
               Navigator.pop(context);
             },
             child: const Text('Add'),

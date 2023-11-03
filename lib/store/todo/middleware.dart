@@ -2,7 +2,7 @@ import 'dart:developer';
 
 import 'package:redux/redux.dart';
 import 'package:todoapp/api/todo_api.dart';
-import 'package:todoapp/store/todo/action.dart';
+import 'package:todoapp/store/actions/todo_action.dart';
 
 import '../../api/exception.dart';
 import '../../models/todo/todo.dart';
@@ -22,13 +22,13 @@ class ToDoMiddlware implements MiddlewareClass<ApplicationState> {
       }
     }
 
-    if (action is CreateToDoAction) {
+    if (action is CreateToDoRequested) {
       log('CreateToDoAction Middleware');
       try {
         await ToDoApi.createToDo(action.todo);
-        store.dispatch(CreateToDoSucceededAction());
+        store.dispatch(CreateToDoSucceeded());
       } on ApiException catch (e) {
-        store.dispatch(CreateToDoFailedAction(e.message));
+        store.dispatch(CreateToDoFailed(action.todo, e.message));
       }
     }
 
