@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:todoapp/ui/home_page.dart';
 
-import 'products_page.dart';
+import 'product/products_page.dart';
 
 class NavigationPage extends StatefulWidget {
   const NavigationPage({super.key});
