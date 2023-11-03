@@ -1,22 +1,32 @@
 import '../../models/cart/cart.dart';
 
-class AddItemToCardRequest {
+class AddItemToCartRequest {
   final String uuid;
-  AddItemToCardRequest(this.uuid);
+  AddItemToCartRequest(this.uuid);
 
   @override
   String toString() {
-    return 'AddItemToCardRequest{uuid: $uuid}';
+    return 'AddItemToCartRequest{uuid: $uuid}';
   }
 }
 
-class AddItemToCardSuccess {
+class AddItemToCartSuccess {
   final CartItem item;
-  AddItemToCardSuccess(this.item);
+  AddItemToCartSuccess(this.item);
 
   @override
   String toString() {
     return 'AddItemToCardSuccess{item: $item}';
+  }
+}
+
+class AddItemToCartFailed {
+  final String error;
+  AddItemToCartFailed(this.error);
+
+  @override
+  String toString() {
+    return 'AddItemToCartFailed{error: $error}';
   }
 }
 
@@ -48,7 +58,7 @@ class FetchCartSuccess {
 }
 
 class FetchCartFailure {
-  final Object error;
+  final String error;
   FetchCartFailure(this.error);
 
   @override

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
+import 'package:todoapp/redux/actions/cart_action.dart';
 import 'package:todoapp/redux/actions/product_action.dart';
 
-import '../store/appstate.dart';
-import 'cart/cart_page.dart';
+import '../../store/appstate.dart';
+import '../cart/cart_page.dart';
 
 class ProductsPage extends StatefulWidget {
   const ProductsPage({super.key});
@@ -58,7 +59,10 @@ class _ProductsPageState extends State<ProductsPage> {
               isThreeLine: true,
               trailing: IconButton(
                 icon: const Icon(Icons.add_shopping_cart),
-                onPressed: () {},
+                onPressed: () {
+                  StoreProvider.of<ApplicationState>(context)
+                      .dispatch(AddItemToCartRequest(product.uuid));
+                },
               ),
             );
           },

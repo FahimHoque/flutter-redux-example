@@ -40,10 +40,48 @@ class _CartPageState extends State<CartPage> {
         ],
       ),
       body: body(),
+      bottomNavigationBar: bottombar(),
     );
   }
 
   Widget body() {
-    return Container();
+    return StoreConnector<ApplicationState, ApplicationState>(
+      converter: (store) => store.state,
+      builder: (context, state) {
+        return ListView.builder(
+          itemCount: state.cart.items.length,
+          itemBuilder: (context, index) {
+            return ListTile(
+              title: Text(state.cart.items[index].name),
+              subtitle: Text(state.cart.items[index].price.toString()),
+              trailing: IconButton(
+                icon: const Icon(Icons.delete_forever, color: Colors.red),
+                onPressed: () {},
+              ),
+            );
+          },
+        );
+      },
+    );
+  }
+
+  Widget bottombar() {
+    return StoreConnector<ApplicationState, ApplicationState>(
+      converter: (store) => store.state,
+      builder: (context, state) {
+        return SizedBox(
+          height: 100,
+          child: Column(
+            children: [
+              Text(state.cart.total.toString()),
+              ElevatedButton(
+                onPressed: () {},
+                child: const Text('Checkout'),
+              ),
+            ],
+          ),
+        );
+      },
+    );
   }
 }

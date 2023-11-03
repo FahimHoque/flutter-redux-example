@@ -14,7 +14,7 @@ class ProductSagas {
         yield Put(FetchProductSuccess(result.value));
       },
       Catch: (e, s) sync* {
-        yield Put(FetchProductFailure(e.message));
+        yield Put(FetchProductFailure(e));
       },
     );
   }

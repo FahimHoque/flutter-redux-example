@@ -64,13 +64,18 @@ class Cart {
 
   Cart.empty();
 
-  void add(Product product) {
+  Cart add(Product product) {
     if (_items.containsKey(product.uuid)) {
       _items[product.uuid] = _items[product.uuid]!
           .copyWith(quantity: _items[product.uuid]!.quantity + 1);
     } else {
       _items[product.uuid] = CartItem.fromProduct(product);
     }
+    return this;
+  }
+
+  CartItem? get(String uuid) {
+    return _items[uuid];
   }
 
   void remove(Product product) {
