@@ -1,5 +1,8 @@
+import 'dart:developer';
+
 import 'package:redux/redux.dart';
 import 'package:todoapp/models/todo/todo.dart';
+import 'package:todoapp/redux/actions/action_utility.dart';
 import '../actions/todo_action.dart';
 
 final toDoReducer = combineReducers<List<ToDo>>([
@@ -9,6 +12,8 @@ final toDoReducer = combineReducers<List<ToDo>>([
 ]);
 
 List<ToDo> _loadToDosSucceeded(List<ToDo> state, FetchTodosSucceeded action) {
+  log(ActionUtility.getKey(action.runtimeType.toString()));
+  log(ActionUtility.getRequestType(action.runtimeType.toString()).toString());
   return action.todos;
 }
 
