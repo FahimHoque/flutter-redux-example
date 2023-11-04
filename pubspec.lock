@@ -177,14 +177,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.3.3"
-  dio:
-    dependency: "direct main"
-    description:
-      name: dio
-      sha256: "417e2a6f9d83ab396ec38ff4ea5da6c254da71e4db765ad737a42af6930140b7"
-      url: "https://pub.dev"
-    source: hosted
-    version: "5.3.3"
   fake_async:
     dependency: transitive
     description:
@@ -379,6 +371,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.5.0"
+  memoize:
+    dependency: transitive
+    description:
+      name: memoize
+      sha256: "51481d328c86cbdc59711369179bac88551ca0556569249be5317e66fc796cac"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.0.0"
   meta:
     dependency: transitive
     description:
@@ -507,14 +507,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "5.0.0"
-  redux_logging:
-    dependency: "direct main"
-    description:
-      name: redux_logging
-      sha256: "544d858862ac6d0d605c4c7f5ee912aa1e0385c45bb14625817cfdfedba6475e"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.5.1"
   redux_saga:
     dependency: "direct main"
     description:
@@ -523,14 +515,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.1.0"
-  redux_thunk:
+  reselect:
     dependency: "direct main"
     description:
-      name: redux_thunk
-      sha256: ae7c41b1401f59440d6709741979a06b6e29cf7a2b00ec239149727340a35403
+      name: reselect
+      sha256: "7b01878d91ab22148001bd04b0da9577444d27636d940110524772ac664f5b88"
       url: "https://pub.dev"
     source: hosted
-    version: "0.4.0"
+    version: "0.5.0"
   shelf:
     dependency: transitive
     description:

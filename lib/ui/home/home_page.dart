@@ -1,9 +1,14 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
+import 'package:reselect/reselect.dart';
 import 'package:todoapp/api/todo_api.dart';
-import 'package:todoapp/models/todo/todo.dart';
 import 'package:todoapp/store/appstate.dart';
 import 'package:todoapp/redux/actions/todo_action.dart';
+
+import '../../models/todo/todo.dart';
+import '_add_form.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -69,25 +74,30 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget body() {
-    return StoreConnector<ApplicationState, List<ToDo>>(
-      converter: (store) => store.state.todos,
-      builder: (context, todos) {
-        if (todos.isEmpty) {
-          return const Center(
-            child: Text('No todos'),
-          );
+    return StoreConnector<ApplicationState, _HomeVM>(
+      converter: (store) {
+        return _HomeVM(
+          isLoading: isLoadingSelector(store.state),
+          todos: todosSelector(store.state),
+        );
+      },
+      builder: (context, vm) {
+        if (vm.isLoading) {
+          return loader();
         } else {
           return ListView.builder(
-            itemCount: todos.length,
+            itemCount: vm.todos.length,
             itemBuilder: (context, index) {
-              final todo = todos[index];
+              final todo = vm.todos[index];
               return ListTile(
                 title: Text(todo.name),
+                subtitle: Text(todo.description),
                 trailing: Checkbox(
                   value: todo.isCompleted,
                   onChanged: (value) {
+                    final newTodo = todo.copyWith(isCompleted: value!);
                     StoreProvider.of<ApplicationState>(context)
-                        .dispatch(ToggleToDoAction(todo));
+                        .dispatch(ToggleToDoAction(newTodo));
                   },
                 ),
               );
@@ -97,53 +107,34 @@ class _HomePageState extends State<HomePage> {
       },
     );
   }
-}
 
-class AddToDoForm extends StatefulWidget {
-  const AddToDoForm({super.key});
-
-  @override
-  State<AddToDoForm> createState() => _AddToDoFormState();
-}
-
-class _AddToDoFormState extends State<AddToDoForm> {
-  final TextEditingController _textEditingController = TextEditingController();
-  final FocusNode _focusNode = FocusNode();
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: 500,
-      padding: const EdgeInsets.all(20),
-      color: Colors.white,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          TextFormField(
-            controller: _textEditingController,
-            focusNode: _focusNode,
-            decoration: const InputDecoration(
-              hintText: 'Enter your todo',
-            ),
-          ),
-          const SizedBox(height: 20),
-          ElevatedButton(
-            onPressed: () {
-              String name = _textEditingController.text;
-              ToDo todo = ToDo(
-                uuid: DateTime.now().millisecondsSinceEpoch.toString(),
-                name: name,
-                description: '',
-                isCompleted: false,
-              );
-
-              StoreProvider.of<ApplicationState>(context)
-                  .dispatch(CreateToDoRequested(todo));
-              Navigator.pop(context);
-            },
-            child: const Text('Add'),
-          ),
-        ],
+  Widget loader() {
+    return const Center(
+      child: CircularProgressIndicator(
+        color: Colors.red,
       ),
     );
   }
+}
+
+final isLoadingSelector = createSelector1(
+  (ApplicationState state) => state.isLoading,
+  (bool isLoading) {
+    log('isLoadingSelector: $isLoading');
+    return isLoading;
+  },
+);
+
+final todosSelector = createSelector1(
+  (ApplicationState state) => state.todos,
+  (List<ToDo> todos) => todos,
+);
+
+class _HomeVM {
+  final bool isLoading;
+  final List<ToDo> todos;
+  _HomeVM({
+    required this.isLoading,
+    required this.todos,
+  });
 }
