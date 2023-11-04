@@ -3,8 +3,6 @@ import 'package:hive/hive.dart';
 part 'todo.freezed.dart';
 part 'todo.g.dart';
 
-enum TourStatusEnum { active, completed, planned }
-
 @HiveType(typeId: 2)
 @freezed
 class ToDo extends HiveObject with _$ToDo {
@@ -14,6 +12,7 @@ class ToDo extends HiveObject with _$ToDo {
     @HiveField(1) @Default("") String name,
     @HiveField(2) @Default("") String description,
     @HiveField(3) @Default(false) bool isCompleted,
+    @HiveField(4) @Default(false) bool isLoading,
   }) = _ToDo;
 
   factory ToDo.fromJson(Map<String, dynamic> json) => _$ToDoFromJson(json);

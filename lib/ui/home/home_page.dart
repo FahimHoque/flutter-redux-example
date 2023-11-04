@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:reselect/reselect.dart';
 import 'package:todoapp/api/todo_api.dart';
+import 'package:todoapp/redux/selectors/todo_selectors.dart';
 import 'package:todoapp/redux/store/appstate.dart';
 import 'package:todoapp/redux/actions/todo_action.dart';
 
@@ -48,6 +49,7 @@ class _HomePageState extends State<HomePage> {
               showModalBottomSheet(
                 context: context,
                 useRootNavigator: true,
+                isDismissible: false,
                 builder: (context) {
                   return const AddToDoForm();
                 },
@@ -77,7 +79,7 @@ class _HomePageState extends State<HomePage> {
       converter: (store) {
         return _HomeVM(
           isLoading: isLoadingSelector(store.state),
-          todos: todosSelector(store.state),
+          todos: getTodos(store.state),
         );
       },
       builder: (context, vm) {
@@ -122,11 +124,6 @@ final isLoadingSelector = createSelector1(
     log('isLoadingSelector: $isLoading');
     return isLoading;
   },
-);
-
-final todosSelector = createSelector1(
-  (AppState state) => state.todos,
-  (List<ToDo> todos) => todos,
 );
 
 class _HomeVM {
