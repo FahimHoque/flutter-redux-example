@@ -1,15 +1,15 @@
 import '../../models/product/product.dart';
 
-class FetchProductRequest {
-  FetchProductRequest();
+class GetProductsRequested {
+  GetProductsRequested();
 }
 
-class FetchProductSuccess {
+class GetProductsSuccess {
   final List<Product> products;
-  FetchProductSuccess(this.products);
+  GetProductsSuccess(this.products);
 }
 
-class FetchProductFailure {
+class GetProductsFailure {
   final String error;
-  FetchProductFailure(this.error);
+  GetProductsFailure(this.error);
 }

@@ -5,12 +5,13 @@ const box_name = 'todo_box';
 
 class ToDoApi {
   static Future<void> createToDo(ToDo todo) async {
+    await Future.delayed(const Duration(seconds: 2));
     final box = await Hive.openBox<ToDo>(box_name);
     await box.put(todo.uuid, todo);
   }
 
   static Future<List<ToDo>> getToDos() async {
-    await Future.delayed(const Duration(seconds: 5));
+    await Future.delayed(const Duration(seconds: 3));
     final box = await Hive.openBox<ToDo>(box_name);
     return box.values.toList();
   }

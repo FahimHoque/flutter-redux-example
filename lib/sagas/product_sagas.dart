@@ -11,15 +11,15 @@ class ProductSagas {
         yield Call(() {
           return ProductApi.getAllProducts();
         }, result: result);
-        yield Put(FetchProductSuccess(result.value));
+        yield Put(GetProductsSuccess(result.value));
       },
       Catch: (e, s) sync* {
-        yield Put(FetchProductFailure(e));
+        yield Put(GetProductsFailure(e));
       },
     );
   }
 
   productRootSaga() sync* {
-    yield TakeEvery(fetchProducts, pattern: FetchProductRequest);
+    yield TakeEvery(fetchProducts, pattern: GetProductsRequested);
   }
 }

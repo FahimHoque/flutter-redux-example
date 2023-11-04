@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:reselect/reselect.dart';
 import 'package:todoapp/api/todo_api.dart';
-import 'package:todoapp/store/appstate.dart';
+import 'package:todoapp/redux/selectors/todo_selectors.dart';
+import 'package:todoapp/redux/store/appstate.dart';
 import 'package:todoapp/redux/actions/todo_action.dart';
 
 import '../../models/todo/todo.dart';
@@ -22,8 +23,7 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
     Future.delayed(Duration.zero, () {
-      StoreProvider.of<ApplicationState>(context)
-          .dispatch(FetchToDosRequested());
+      StoreProvider.of<AppState>(context).dispatch(FetchToDosRequested());
     });
   }
 
@@ -49,6 +49,7 @@ class _HomePageState extends State<HomePage> {
               showModalBottomSheet(
                 context: context,
                 useRootNavigator: true,
+                isDismissible: false,
                 builder: (context) {
                   return const AddToDoForm();
                 },
@@ -74,11 +75,11 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget body() {
-    return StoreConnector<ApplicationState, _HomeVM>(
+    return StoreConnector<AppState, _HomeVM>(
       converter: (store) {
         return _HomeVM(
           isLoading: isLoadingSelector(store.state),
-          todos: todosSelector(store.state),
+          todos: getTodos(store.state),
         );
       },
       builder: (context, vm) {
@@ -96,8 +97,8 @@ class _HomePageState extends State<HomePage> {
                   value: todo.isCompleted,
                   onChanged: (value) {
                     final newTodo = todo.copyWith(isCompleted: value!);
-                    StoreProvider.of<ApplicationState>(context)
-                        .dispatch(ToggleToDoAction(newTodo));
+                    StoreProvider.of<AppState>(context)
+                        .dispatch(ToggleToDoRequested(newTodo));
                   },
                 ),
               );
@@ -118,16 +119,11 @@ class _HomePageState extends State<HomePage> {
 }
 
 final isLoadingSelector = createSelector1(
-  (ApplicationState state) => state.isLoading,
+  (AppState state) => state.isLoading,
   (bool isLoading) {
     log('isLoadingSelector: $isLoading');
     return isLoading;
   },
-);
-
-final todosSelector = createSelector1(
-  (ApplicationState state) => state.todos,
-  (List<ToDo> todos) => todos,
 );
 
 class _HomeVM {

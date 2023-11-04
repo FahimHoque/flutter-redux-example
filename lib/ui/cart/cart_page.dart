@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:todoapp/redux/actions/cart_action.dart';
 
-import '../../store/appstate.dart';
+import '../../redux/store/appstate.dart';
 
 class CartPage extends StatefulWidget {
   const CartPage({super.key});
@@ -16,8 +16,7 @@ class _CartPageState extends State<CartPage> {
   void initState() {
     super.initState();
     Future.delayed(Duration.zero, () {
-      StoreProvider.of<ApplicationState>(context)
-          .dispatch((FetchCartRequest()));
+      StoreProvider.of<AppState>(context).dispatch((FetchCartRequest()));
     });
   }
 
@@ -45,7 +44,7 @@ class _CartPageState extends State<CartPage> {
   }
 
   Widget body() {
-    return StoreConnector<ApplicationState, ApplicationState>(
+    return StoreConnector<AppState, AppState>(
       converter: (store) => store.state,
       builder: (context, state) {
         return ListView.builder(
@@ -57,7 +56,7 @@ class _CartPageState extends State<CartPage> {
               trailing: IconButton(
                 icon: const Icon(Icons.delete, color: Colors.red),
                 onPressed: () {
-                  StoreProvider.of<ApplicationState>(context).dispatch(
+                  StoreProvider.of<AppState>(context).dispatch(
                     RemoveItemFromCartRequest(
                       state.cart.items[index].uuid,
                     ),
@@ -72,7 +71,7 @@ class _CartPageState extends State<CartPage> {
   }
 
   Widget bottombar() {
-    return StoreConnector<ApplicationState, ApplicationState>(
+    return StoreConnector<AppState, AppState>(
       converter: (store) => store.state,
       builder: (context, state) {
         return SizedBox(

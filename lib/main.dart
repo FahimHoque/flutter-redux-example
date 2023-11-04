@@ -4,7 +4,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:todoapp/app.dart';
 import 'package:todoapp/models/todo/todo_adapter.dart';
 
-import 'store/configure.dart';
+import 'redux/store/configure.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();

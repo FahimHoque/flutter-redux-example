@@ -28,6 +28,8 @@ mixin _$ToDo {
   String get description => throw _privateConstructorUsedError;
   @HiveField(3)
   bool get isCompleted => throw _privateConstructorUsedError;
+  @HiveField(4)
+  bool get isLoading => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -43,7 +45,8 @@ abstract class $ToDoCopyWith<$Res> {
       {@HiveField(0) String uuid,
       @HiveField(1) String name,
       @HiveField(2) String description,
-      @HiveField(3) bool isCompleted});
+      @HiveField(3) bool isCompleted,
+      @HiveField(4) bool isLoading});
 }
 
 /// @nodoc
@@ -63,6 +66,7 @@ class _$ToDoCopyWithImpl<$Res, $Val extends ToDo>
     Object? name = null,
     Object? description = null,
     Object? isCompleted = null,
+    Object? isLoading = null,
   }) {
     return _then(_value.copyWith(
       uuid: null == uuid
@@ -81,6 +85,10 @@ class _$ToDoCopyWithImpl<$Res, $Val extends ToDo>
           ? _value.isCompleted
           : isCompleted // ignore: cast_nullable_to_non_nullable
               as bool,
+      isLoading: null == isLoading
+          ? _value.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -96,7 +104,8 @@ abstract class _$$ToDoImplCopyWith<$Res> implements $ToDoCopyWith<$Res> {
       {@HiveField(0) String uuid,
       @HiveField(1) String name,
       @HiveField(2) String description,
-      @HiveField(3) bool isCompleted});
+      @HiveField(3) bool isCompleted,
+      @HiveField(4) bool isLoading});
 }
 
 /// @nodoc
@@ -113,6 +122,7 @@ class __$$ToDoImplCopyWithImpl<$Res>
     Object? name = null,
     Object? description = null,
     Object? isCompleted = null,
+    Object? isLoading = null,
   }) {
     return _then(_$ToDoImpl(
       uuid: null == uuid
@@ -131,6 +141,10 @@ class __$$ToDoImplCopyWithImpl<$Res>
           ? _value.isCompleted
           : isCompleted // ignore: cast_nullable_to_non_nullable
               as bool,
+      isLoading: null == isLoading
+          ? _value.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -143,7 +157,8 @@ class _$ToDoImpl extends _ToDo {
       {@HiveField(0) this.uuid = "",
       @HiveField(1) this.name = "",
       @HiveField(2) this.description = "",
-      @HiveField(3) this.isCompleted = false})
+      @HiveField(3) this.isCompleted = false,
+      @HiveField(4) this.isLoading = false})
       : super._();
 
   factory _$ToDoImpl.fromJson(Map<String, dynamic> json) =>
@@ -165,10 +180,14 @@ class _$ToDoImpl extends _ToDo {
   @JsonKey()
   @HiveField(3)
   final bool isCompleted;
+  @override
+  @JsonKey()
+  @HiveField(4)
+  final bool isLoading;
 
   @override
   String toString() {
-    return 'ToDo(uuid: $uuid, name: $name, description: $description, isCompleted: $isCompleted)';
+    return 'ToDo(uuid: $uuid, name: $name, description: $description, isCompleted: $isCompleted, isLoading: $isLoading)';
   }
 
   @override
@@ -181,13 +200,15 @@ class _$ToDoImpl extends _ToDo {
             (identical(other.description, description) ||
                 other.description == description) &&
             (identical(other.isCompleted, isCompleted) ||
-                other.isCompleted == isCompleted));
+                other.isCompleted == isCompleted) &&
+            (identical(other.isLoading, isLoading) ||
+                other.isLoading == isLoading));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode =>
-      Object.hash(runtimeType, uuid, name, description, isCompleted);
+      Object.hash(runtimeType, uuid, name, description, isCompleted, isLoading);
 
   @JsonKey(ignore: true)
   @override
@@ -208,7 +229,8 @@ abstract class _ToDo extends ToDo {
       {@HiveField(0) final String uuid,
       @HiveField(1) final String name,
       @HiveField(2) final String description,
-      @HiveField(3) final bool isCompleted}) = _$ToDoImpl;
+      @HiveField(3) final bool isCompleted,
+      @HiveField(4) final bool isLoading}) = _$ToDoImpl;
   _ToDo._() : super._();
 
   factory _ToDo.fromJson(Map<String, dynamic> json) = _$ToDoImpl.fromJson;
@@ -225,6 +247,9 @@ abstract class _ToDo extends ToDo {
   @override
   @HiveField(3)
   bool get isCompleted;
+  @override
+  @HiveField(4)
+  bool get isLoading;
   @override
   @JsonKey(ignore: true)
   _$$ToDoImplCopyWith<_$ToDoImpl> get copyWith =>

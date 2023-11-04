@@ -4,12 +4,18 @@ class CreateToDoRequested {
   final ToDo todo;
 
   CreateToDoRequested(this.todo);
+
+  @override
+  String toString() => 'CreateToDoRequested { todo: $todo }';
 }
 
 class CreateToDoSucceeded {
   final ToDo todo;
 
   CreateToDoSucceeded(this.todo);
+
+  @override
+  String toString() => 'CreateToDoSucceeded { todo: $todo }';
 }
 
 class CreateToDoFailed {
@@ -17,40 +23,63 @@ class CreateToDoFailed {
   final String error;
 
   CreateToDoFailed(this.todo, this.error);
+
+  @override
+  String toString() => 'CreateToDoFailed { todo: $todo, error: $error }';
 }
 
 // FETCH TODOs
 
-class FetchToDosRequested {}
+class FetchToDosRequested {
+  FetchToDosRequested();
+
+  @override
+  String toString() => 'FetchToDosRequested';
+}
 
 class FetchTodosSucceeded {
   final List<ToDo> todos;
 
   FetchTodosSucceeded(this.todos);
+
+  @override
+  String toString() => 'FetchTodosSucceeded { todos: $todos }';
 }
 
 class FetchTodosFailed {
   final String error;
   FetchTodosFailed(this.error);
+
+  @override
+  String toString() => 'FetchTodosFailed { error: $error }';
 }
 
 // TOGGLE TODOs
 
-class ToggleToDoAction {
+class ToggleToDoRequested {
   final ToDo todo;
 
-  ToggleToDoAction(this.todo);
+  ToggleToDoRequested(this.todo);
+
+  @override
+  String toString() => 'ToggleToDoRequested { todo: $todo }';
 }
 
-class ToggleToDoSucceededAction {
+class ToggleToDoSucceeded {
   final ToDo todo;
 
-  ToggleToDoSucceededAction(this.todo);
+  ToggleToDoSucceeded(this.todo);
+
+  @override
+  String toString() => 'ToggleToDoSucceeded { todo: $todo }';
 }
 
-class ToggleToDoFailedAction {
+class ToggleToDoFailed {
   final ToDo todo;
   final String error;
 
-  ToggleToDoFailedAction(this.todo, this.error);
+  ToggleToDoFailed(this.todo, this.error);
+
+  @override
+  String toString() => 'ToggleToDoFailed { todo: $todo, error: $error }';
 }

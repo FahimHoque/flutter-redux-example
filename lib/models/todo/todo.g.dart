@@ -21,13 +21,14 @@ class ToDoAdapter extends TypeAdapter<ToDo> {
       name: fields[1] as String,
       description: fields[2] as String,
       isCompleted: fields[3] as bool,
+      isLoading: fields[4] as bool,
     );
   }
 
   @override
   void write(BinaryWriter writer, ToDo obj) {
     writer
-      ..writeByte(4)
+      ..writeByte(5)
       ..writeByte(0)
       ..write(obj.uuid)
       ..writeByte(1)
@@ -35,7 +36,9 @@ class ToDoAdapter extends TypeAdapter<ToDo> {
       ..writeByte(2)
       ..write(obj.description)
       ..writeByte(3)
-      ..write(obj.isCompleted);
+      ..write(obj.isCompleted)
+      ..writeByte(4)
+      ..write(obj.isLoading);
   }
 
   @override
@@ -64,13 +67,14 @@ class ToDoImplAdapter extends TypeAdapter<_$ToDoImpl> {
       name: fields[1] as String,
       description: fields[2] as String,
       isCompleted: fields[3] as bool,
+      isLoading: fields[4] as bool,
     );
   }
 
   @override
   void write(BinaryWriter writer, _$ToDoImpl obj) {
     writer
-      ..writeByte(4)
+      ..writeByte(5)
       ..writeByte(0)
       ..write(obj.uuid)
       ..writeByte(1)
@@ -78,7 +82,9 @@ class ToDoImplAdapter extends TypeAdapter<_$ToDoImpl> {
       ..writeByte(2)
       ..write(obj.description)
       ..writeByte(3)
-      ..write(obj.isCompleted);
+      ..write(obj.isCompleted)
+      ..writeByte(4)
+      ..write(obj.isLoading);
   }
 
   @override
@@ -101,6 +107,7 @@ _$ToDoImpl _$$ToDoImplFromJson(Map<String, dynamic> json) => _$ToDoImpl(
       name: json['name'] as String? ?? "",
       description: json['description'] as String? ?? "",
       isCompleted: json['isCompleted'] as bool? ?? false,
+      isLoading: json['isLoading'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$$ToDoImplToJson(_$ToDoImpl instance) =>
@@ -109,4 +116,5 @@ Map<String, dynamic> _$$ToDoImplToJson(_$ToDoImpl instance) =>
       'name': instance.name,
       'description': instance.description,
       'isCompleted': instance.isCompleted,
+      'isLoading': instance.isLoading,
     };

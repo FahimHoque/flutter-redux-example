@@ -1,53 +1,36 @@
 import 'package:redux/redux.dart';
-import 'package:todoapp/store/appstate.dart';
+import 'package:todoapp/models/todo/todo.dart';
 import '../actions/todo_action.dart';
 
-final toDoReducer = combineReducers<ApplicationState>([
-  TypedReducer<ApplicationState, FetchToDosRequested>(
-    _loadToDosRequested,
-  ),
-  TypedReducer<ApplicationState, FetchTodosSucceeded>(
-    _loadToDosSucceeded,
-  ),
-  TypedReducer<ApplicationState, FetchTodosFailed>(
-    _loadToDosFailed,
-  ),
-  TypedReducer<ApplicationState, CreateToDoRequested>(
-    _createToDo,
-  ),
-  TypedReducer<ApplicationState, ToggleToDoSucceededAction>(
-    _toggleToDoSucceeded,
-  ),
+final toDoReducer = combineReducers<List<ToDo>>([
+  TypedReducer<List<ToDo>, FetchToDosRequested>(_loadToDosRequested),
+  TypedReducer<List<ToDo>, FetchTodosSucceeded>(_loadToDosSucceeded),
+  TypedReducer<List<ToDo>, FetchTodosFailed>(_loadToDosFailed),
+  TypedReducer<List<ToDo>, CreateToDoRequested>(_createToDo),
+  TypedReducer<List<ToDo>, ToggleToDoSucceeded>(_toggleToDoSucceeded)
 ]);
 
-ApplicationState _loadToDosRequested(
-    ApplicationState state, FetchToDosRequested action) {
-  return state.copyWith(isLoading: true);
+List<ToDo> _loadToDosRequested(List<ToDo> todos, FetchToDosRequested action) {
+  return todos;
 }
 
-ApplicationState _loadToDosSucceeded(
-    ApplicationState state, FetchTodosSucceeded action) {
-  return state.copyWith(todos: action.todos, isLoading: false);
+List<ToDo> _loadToDosSucceeded(List<ToDo> state, FetchTodosSucceeded action) {
+  return action.todos;
 }
 
-ApplicationState _loadToDosFailed(
-    ApplicationState state, FetchTodosFailed action) {
-  ApplicationState newState = state.copyWith(isLoading: false);
-  return newState;
+List<ToDo> _loadToDosFailed(List<ToDo> todos, FetchTodosFailed action) {
+  return todos;
 }
 
-ApplicationState _createToDo(
-    ApplicationState state, CreateToDoRequested action) {
-  return state.copyWith(todos: [...state.todos, action.todo], isLoading: true);
+List<ToDo> _createToDo(List<ToDo> todos, CreateToDoRequested action) {
+  return todos..add(action.todo);
 }
 
-ApplicationState _toggleToDoSucceeded(
-    ApplicationState state, ToggleToDoSucceededAction action) {
-  final newToDos = state.todos.map((todo) {
+List<ToDo> _toggleToDoSucceeded(List<ToDo> todo, ToggleToDoSucceeded action) {
+  return todo.map((todo) {
     if (todo.uuid == action.todo.uuid) {
       return action.todo;
     }
     return todo;
   }).toList();
-  return state.copyWith(todos: newToDos, isLoading: false);
 }
