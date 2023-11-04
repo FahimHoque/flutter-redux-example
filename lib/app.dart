@@ -3,10 +3,10 @@ import 'package:flutter_redux/flutter_redux.dart';
 import 'package:redux/redux.dart';
 import 'package:todoapp/ui/navigation/navigation_page.dart';
 
-import 'store/appstate.dart';
+import 'redux/store/appstate.dart';
 
 class MyApp extends StatelessWidget {
-  final Store<ApplicationState> store;
+  final Store<AppState> store;
   const MyApp({
     super.key,
     required this.store,
@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return StoreProvider<ApplicationState>(
+    return StoreProvider<AppState>(
       store: store,
       child: MaterialApp(
         title: 'Flutter Demo',

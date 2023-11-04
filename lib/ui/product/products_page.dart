@@ -3,7 +3,7 @@ import 'package:flutter_redux/flutter_redux.dart';
 import 'package:todoapp/redux/actions/cart_action.dart';
 import 'package:todoapp/redux/actions/product_action.dart';
 
-import '../../store/appstate.dart';
+import '../../redux/store/appstate.dart';
 import '../cart/cart_page.dart';
 
 class ProductsPage extends StatefulWidget {
@@ -18,8 +18,7 @@ class _ProductsPageState extends State<ProductsPage> {
   void initState() {
     super.initState();
     Future.delayed(Duration.zero, () {
-      StoreProvider.of<ApplicationState>(context)
-          .dispatch(FetchProductRequest());
+      StoreProvider.of<AppState>(context).dispatch(FetchProductRequest());
     });
   }
 
@@ -46,7 +45,7 @@ class _ProductsPageState extends State<ProductsPage> {
   }
 
   Widget body() {
-    return StoreConnector<ApplicationState, ApplicationState>(
+    return StoreConnector<AppState, AppState>(
       converter: (store) => store.state,
       builder: (context, state) {
         return ListView.builder(
@@ -60,7 +59,7 @@ class _ProductsPageState extends State<ProductsPage> {
               trailing: IconButton(
                 icon: const Icon(Icons.add_shopping_cart),
                 onPressed: () {
-                  StoreProvider.of<ApplicationState>(context)
+                  StoreProvider.of<AppState>(context)
                       .dispatch(AddItemToCartRequest(product.uuid));
                 },
               ),

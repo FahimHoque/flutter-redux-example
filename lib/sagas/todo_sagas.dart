@@ -45,10 +45,10 @@ class ToDoSaga {
             action.todo.uuid,
           );
         }, result: result);
-        yield Put(ToggleToDoSucceededAction(result.value));
+        yield Put(ToggleToDoSucceeded(result.value));
       },
       Catch: (e, s) sync* {
-        yield Put(ToggleToDoFailedAction(action.todo, e.message));
+        yield Put(ToggleToDoFailed(action.todo, e.message));
       },
     );
   }
@@ -56,6 +56,6 @@ class ToDoSaga {
   todoRootSaga() sync* {
     yield TakeEvery(fetchToDos, pattern: FetchToDosRequested);
     yield TakeEvery(createToDoAction, pattern: CreateToDoRequested);
-    yield TakeEvery(toggleToDoAction, pattern: ToggleToDoAction);
+    yield TakeEvery(toggleToDoAction, pattern: ToggleToDoRequested);
   }
 }

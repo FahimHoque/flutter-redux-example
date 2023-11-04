@@ -36,21 +36,21 @@ class FetchTodosFailed {
 
 // TOGGLE TODOs
 
-class ToggleToDoAction {
+class ToggleToDoRequested {
   final ToDo todo;
 
-  ToggleToDoAction(this.todo);
+  ToggleToDoRequested(this.todo);
 }
 
-class ToggleToDoSucceededAction {
+class ToggleToDoSucceeded {
   final ToDo todo;
 
-  ToggleToDoSucceededAction(this.todo);
+  ToggleToDoSucceeded(this.todo);
 }
 
-class ToggleToDoFailedAction {
+class ToggleToDoFailed {
   final ToDo todo;
   final String error;
 
-  ToggleToDoFailedAction(this.todo, this.error);
+  ToggleToDoFailed(this.todo, this.error);
 }

@@ -3,7 +3,7 @@ import 'package:flutter_redux/flutter_redux.dart';
 
 import '../../models/todo/todo.dart';
 import '../../redux/actions/todo_action.dart';
-import '../../store/appstate.dart';
+import '../../redux/store/appstate.dart';
 
 class AddToDoForm extends StatefulWidget {
   const AddToDoForm({super.key});
@@ -42,7 +42,7 @@ class _AddToDoFormState extends State<AddToDoForm> {
                 isCompleted: false,
               );
 
-              StoreProvider.of<ApplicationState>(context)
+              StoreProvider.of<AppState>(context)
                   .dispatch(CreateToDoRequested(todo));
               Navigator.pop(context);
             },
