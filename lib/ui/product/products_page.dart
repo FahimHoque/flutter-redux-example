@@ -18,7 +18,7 @@ class _ProductsPageState extends State<ProductsPage> {
   void initState() {
     super.initState();
     Future.delayed(Duration.zero, () {
-      StoreProvider.of<AppState>(context).dispatch(FetchProductRequest());
+      StoreProvider.of<AppState>(context).dispatch(GetProductsRequested());
     });
   }
 

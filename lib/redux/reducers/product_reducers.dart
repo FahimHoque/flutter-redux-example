@@ -4,10 +4,10 @@ import 'package:todoapp/redux/actions/product_action.dart';
 import '../../models/product/product.dart';
 
 final productReducer = combineReducers<List<Product>>([
-  TypedReducer<List<Product>, FetchProductSuccess>(_loadProductsSucceeded),
+  TypedReducer<List<Product>, GetProductsSuccess>(loadProductsSuccees),
 ]);
 
-List<Product> _loadProductsSucceeded(
-    List<Product> state, FetchProductSuccess action) {
+List<Product> loadProductsSuccees(
+    List<Product> state, GetProductsSuccess action) {
   return action.products;
 }
