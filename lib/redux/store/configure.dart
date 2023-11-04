@@ -5,7 +5,7 @@ import 'package:todoapp/redux/store/appstate.dart';
 import 'package:redux_saga/redux_saga.dart';
 import 'package:todoapp/sagas/todo_sagas.dart';
 
-import '../reducer.dart';
+import '../reducers/reducer.dart';
 
 Store<AppState> configureStore() {
   SagaMiddleware sagaMiddleware = createSagaMiddleware();
