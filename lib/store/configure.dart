@@ -17,7 +17,7 @@ Store<ApplicationState> configureStore() {
   );
 
   sagaMiddleware.setStore(store);
-  sagaMiddleware.run(rootSaga);
+  sagaMiddleware.run(ToDoSaga().todoRootSaga);
   sagaMiddleware.run(ProductSagas().productRootSaga);
   sagaMiddleware.run(CartSaga().cartRootSaga);
   return store;

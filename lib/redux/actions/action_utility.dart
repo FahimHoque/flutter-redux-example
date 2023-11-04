@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 enum RequestType { requested, succeeded, failed }
 
 class ActionUtility {
@@ -11,10 +13,13 @@ class ActionUtility {
   }
 
   static RequestType getRequestType(String type) {
-    for (var i = 0; i < RequestType.values.length; i++) {
-      if (RequestType.values[i].toString() == type) {
-        return RequestType.values[i];
-      }
+    log('getRequestType: $type');
+    if (type.contains('Requested')) {
+      return RequestType.requested;
+    } else if (type.contains('Succeeded')) {
+      return RequestType.succeeded;
+    } else if (type.contains('Failed')) {
+      return RequestType.failed;
     }
     return RequestType.requested;
   }

@@ -3,31 +3,27 @@ import 'package:todoapp/store/appstate.dart';
 import '../actions/todo_action.dart';
 
 final toDoReducer = combineReducers<ApplicationState>([
-  TypedReducer<ApplicationState, FetchToDosRequested>(
-    _loadToDosRequested,
-  ),
-  TypedReducer<ApplicationState, FetchTodosSucceeded>(
-    _loadToDosSucceeded,
-  ),
-  TypedReducer<ApplicationState, FetchTodosFailed>(
-    _loadToDosFailed,
-  ),
-  TypedReducer<ApplicationState, CreateToDoRequested>(
-    _createToDo,
-  ),
+  TypedReducer<ApplicationState, FetchToDosRequested>(_loadToDosRequested),
+  TypedReducer<ApplicationState, FetchTodosSucceeded>(_loadToDosSucceeded),
+  TypedReducer<ApplicationState, FetchTodosFailed>(_loadToDosFailed),
+  TypedReducer<ApplicationState, CreateToDoRequested>(_createToDo),
   TypedReducer<ApplicationState, ToggleToDoSucceededAction>(
-    _toggleToDoSucceeded,
-  ),
+      _toggleToDoSucceeded)
 ]);
 
 ApplicationState _loadToDosRequested(
     ApplicationState state, FetchToDosRequested action) {
-  return state.copyWith(isLoading: true);
+  ApplicationState newState = state.copyWith(isLoading: true);
+  return newState;
 }
 
 ApplicationState _loadToDosSucceeded(
     ApplicationState state, FetchTodosSucceeded action) {
-  return state.copyWith(todos: action.todos, isLoading: false);
+  ApplicationState newState = state.copyWith(
+    todos: action.todos,
+    isLoading: false,
+  );
+  return newState;
 }
 
 ApplicationState _loadToDosFailed(
