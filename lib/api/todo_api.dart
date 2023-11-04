@@ -10,6 +10,7 @@ class ToDoApi {
   }
 
   static Future<List<ToDo>> getToDos() async {
+    await Future.delayed(const Duration(seconds: 5));
     final box = await Hive.openBox<ToDo>(box_name);
     return box.values.toList();
   }

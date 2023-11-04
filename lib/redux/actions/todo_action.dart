@@ -1,34 +1,18 @@
-// ignore_for_file: constant_identifier_names
-
 import '../../models/todo/todo.dart';
 
-enum ActionType {
-  REQUESTED,
-  LOADING,
-  SUCCEEDED,
-  FAILED,
-}
-
-abstract class ToDoAction {
-  @override
-  String toString() => runtimeType.toString();
-}
-
-// CREATE TODOs
-
-class CreateToDoRequested implements ToDoAction {
+class CreateToDoRequested {
   final ToDo todo;
 
   CreateToDoRequested(this.todo);
 }
 
-class CreateToDoSucceeded implements ToDoAction {
+class CreateToDoSucceeded {
   final ToDo todo;
 
   CreateToDoSucceeded(this.todo);
 }
 
-class CreateToDoFailed implements ToDoAction {
+class CreateToDoFailed {
   final ToDo todo;
   final String error;
 
@@ -37,34 +21,34 @@ class CreateToDoFailed implements ToDoAction {
 
 // FETCH TODOs
 
-class FetchToDosRequested implements ToDoAction {}
+class FetchToDosRequested {}
 
-class FetchTodosSucceeded implements ToDoAction {
+class FetchTodosSucceeded {
   final List<ToDo> todos;
 
   FetchTodosSucceeded(this.todos);
 }
 
-class FetchTodosFailed implements ToDoAction {
+class FetchTodosFailed {
   final String error;
   FetchTodosFailed(this.error);
 }
 
 // TOGGLE TODOs
 
-class ToggleToDoAction implements ToDoAction {
+class ToggleToDoAction {
   final ToDo todo;
 
   ToggleToDoAction(this.todo);
 }
 
-class ToggleToDoSucceededAction implements ToDoAction {
+class ToggleToDoSucceededAction {
   final ToDo todo;
 
   ToggleToDoSucceededAction(this.todo);
 }
 
-class ToggleToDoFailedAction implements ToDoAction {
+class ToggleToDoFailedAction {
   final ToDo todo;
   final String error;
 
